@@ -14,6 +14,17 @@ const createTodo = (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+function getTodo(req: Request, res: Response, next: NextFunction) {
+  try {
+    const id = req.params['id'];
+    const result = Service.get(id);
+
+    res.status(StatusCodes.OK).send(result);
+  } catch (error) {
+    next(error);
+  }
+}
+
 const getTodos = (req: Request, res: Response, next: NextFunction) => {
   try {
     const result = Service.getTodos();
@@ -24,4 +35,4 @@ const getTodos = (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export { createTodo, getTodos };
+export { createTodo, getTodos, getTodo };

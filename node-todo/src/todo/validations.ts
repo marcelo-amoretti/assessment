@@ -8,4 +8,9 @@ const createTodo = Joi.object({
   },
 });
 
-export { createTodo };
+const getTodo = Joi.object({
+  params: {
+    id: Joi.string(),
+  },
+});
+export { createTodo, getTodo };
