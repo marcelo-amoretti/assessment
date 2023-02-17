@@ -19,6 +19,38 @@ const create = (todo: Todo): Todo => {
   }
 };
 
+const deleteTodo = (id: string): boolean => {
+  try {
+    const todos = JSON.parse(readFileSync(jsonFile, 'utf-8') || '[]');
+    const todoIndex = todos.findIndex((el: Todo) => el.id === id);
+    console.log('todoIndex', todoIndex, todos);
+    if (todoIndex < 0) {
+      throw {
+        status: StatusCodes.NOT_FOUND,
+        message: 'Todo not found',
+      };
+    }
+
+    const deletedTodo = {
+      ...todos[todoIndex],
+      updated_at: new Date().toString(),
+      deleted_at: new Date().toString(),
+    };
+
+    todos[todoIndex] = deletedTodo;
+    writeFileSync(jsonFile, JSON.stringify(todos));
+
+    return true;
+  } catch (error: any) {
+    if (error.status) {
+      return error;
+    }
+    throw {
+      status: StatusCodes.INTERNAL_SERVER_ERROR,
+      message: 'Unable to delete todo',
+    };
+  }
+};
 const getOne = (id: string): Todo => {
   try {
     let todos: Todo[] = JSON.parse(readFileSync(jsonFile, 'utf-8') || '[]');
@@ -58,4 +90,4 @@ const getAll = (): Todo[] => {
   }
 };
 
-export { create, getAll, getOne };
+export { create, deleteTodo, getAll, getOne };

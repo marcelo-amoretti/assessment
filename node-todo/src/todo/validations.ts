@@ -8,9 +8,16 @@ const createTodo = Joi.object({
   },
 });
 
+const deleteTodo = Joi.object({
+  params: {
+    id: Joi.string().required(),
+  },
+});
+
 const getTodo = Joi.object({
   params: {
     id: Joi.string(),
   },
 });
-export { createTodo, getTodo };
+
+export { createTodo, deleteTodo, getTodo };
