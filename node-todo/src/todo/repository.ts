@@ -74,7 +74,7 @@ const updateTodo = (todo: Todo): Todo => {
 
 const getOne = (id: string): Todo => {
   try {
-    const todos: Todo[] = JSON.parse(readFileSync(jsonFile, 'utf-8') || '[]')?.filter?.filter((todo: Todo) => !todo.deleted_at);
+    const todos: Todo[] = JSON.parse(readFileSync(jsonFile, 'utf-8') || '[]')?.filter((todo: Todo) => !todo.deleted_at);
 
     const todo = todos.find(todo => todo.id === id);
     if (!todo) {
