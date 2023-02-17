@@ -23,7 +23,7 @@ const deleteTodo = (id: string): boolean => {
   try {
     const todos = JSON.parse(readFileSync(jsonFile, 'utf-8') || '[]');
     const todoIndex = todos.findIndex((el: Todo) => el.id === id);
-    console.log('todoIndex', todoIndex, todos);
+
     if (todoIndex < 0) {
       throw {
         status: StatusCodes.NOT_FOUND,
@@ -74,8 +74,7 @@ const updateTodo = (todo: Todo): Todo => {
 
 const getOne = (id: string): Todo => {
   try {
-    let todos: Todo[] = JSON.parse(readFileSync(jsonFile, 'utf-8') || '[]');
-    todos = todos?.filter(todo => !todo.deleted_at);
+    const todos: Todo[] = JSON.parse(readFileSync(jsonFile, 'utf-8') || '[]')?.filter?.filter((todo: Todo) => !todo.deleted_at);
 
     const todo = todos.find(todo => todo.id === id);
     if (!todo) {
@@ -99,10 +98,7 @@ const getOne = (id: string): Todo => {
 
 const getAll = (): Todo[] => {
   try {
-    let todos: Todo[] = JSON.parse(readFileSync(jsonFile, 'utf-8') || '[]');
-    todos = todos?.filter(todo => !todo.deleted_at);
-
-    return todos;
+    return JSON.parse(readFileSync(jsonFile, 'utf-8') || '[]')?.filter((todo: Todo) => !todo.deleted_at);
   } catch (error) {
     throw {
       status: StatusCodes.INTERNAL_SERVER_ERROR,

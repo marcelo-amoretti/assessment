@@ -19,7 +19,7 @@ const deleteTodo = (req: Request, res: Response, next: NextFunction) => {
     const id = req.params['id'];
     Service.deleteTodo(id);
 
-    res.status(200).send('Success');
+    res.status(StatusCodes.OK).send('Success');
   } catch (error) {
     next(error);
   }
