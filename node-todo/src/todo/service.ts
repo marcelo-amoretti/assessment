@@ -17,4 +17,6 @@ const create = (todo: Omit<Todo, 'id' | 'created_at' | 'updated_at' | 'deleted_a
   return Repository.create(newTodo);
 };
 
-export { create };
+const getTodos = (): Todo[] => Repository.getAll();
+
+export { create, getTodos};

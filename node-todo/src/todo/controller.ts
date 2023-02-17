@@ -14,4 +14,14 @@ const createTodo = (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export { createTodo };
+const getTodos = (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const result = Service.getTodos();
+
+    res.status(StatusCodes.OK).send(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export { createTodo, getTodos };

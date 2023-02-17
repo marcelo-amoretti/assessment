@@ -19,4 +19,18 @@ const create = (todo: Todo): Todo => {
   }
 };
 
-export { create };
+const getAll = (): Todo[] => {
+  try {
+    let todos: Todo[] = JSON.parse(readFileSync(jsonFile, 'utf-8') || '[]');
+    todos = todos?.filter(todo => !todo.deleted_at);
+
+    return todos;
+  } catch (error) {
+    throw {
+      status: StatusCodes.INTERNAL_SERVER_ERROR,
+      message: 'Unable to get TODOs',
+    };
+  }
+};
+
+export { create, getAll };
