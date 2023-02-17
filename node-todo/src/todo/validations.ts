@@ -22,7 +22,7 @@ const getTodo = Joi.object({
 
 const updateTodo = Joi.object({
   body: {
-    id: Joi.string().required(),
+    id: Joi.string().allow(null, ''),
     text: Joi.string()
       .required()
       .regex(/^[a-zA-Z ]*$/),
