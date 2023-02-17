@@ -5,6 +5,7 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "nodemon src/index.ts",
+    "test": "jest test --notify"
   },
   "repository": {
     "type": "git",
