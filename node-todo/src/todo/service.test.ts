@@ -44,9 +44,9 @@ const mockedDB = [
 
 describe('getOne tests', () => {
   test('should get a specific Todo from list', () => {
-    let spyGetOne = jest.spyOn(Repository, 'getOne');
+    const spyGetOne = jest.spyOn(Repository, 'getOne');
     spyGetOne.mockReturnValue(mockedDB[2]);
-    let response = Service.get('73c455a4-8d1f-4d434d-9e6c-ee4fd24cdc25');
+    const response = Service.get('73c455a4-8d1f-4d434d-9e6c-ee4fd24cdc25');
     expect(response).toEqual(mockedDB[2]);
     expect(spyGetOne).toBeCalledTimes(1);
   });
@@ -63,10 +63,10 @@ describe('getOne tests', () => {
 
 describe('getAll tests', () => {
   test('should return all Todos', () => {
-    let SpyGetAll = jest.spyOn(Repository, 'getAll');
+    const SpyGetAll = jest.spyOn(Repository, 'getAll');
     SpyGetAll.mockReturnValue(mockedDB);
 
-    let response = Service.getTodos();
+    const response = Service.getTodos();
     expect(response).toEqual(mockedDB);
     expect(SpyGetAll).toBeCalledTimes(1);
   });
@@ -90,9 +90,9 @@ describe('create new Todos', () => {
       deleted_at: null,
     };
 
-    let spyCreateTodo = jest.spyOn(Repository, 'create');
+    const spyCreateTodo = jest.spyOn(Repository, 'create');
     spyCreateTodo.mockReturnValue(todoResponse);
-    let response = Service.create(newTodo);
+    const response = Service.create(newTodo);
 
     expect(response).toBe(todoResponse);
   });
@@ -113,9 +113,9 @@ describe('create new Todos', () => {
       deleted_at: null,
     };
 
-    let spyCreateTodo = jest.spyOn(Repository, 'create');
+    const spyCreateTodo = jest.spyOn(Repository, 'create');
     spyCreateTodo.mockReturnValue(todoResponse);
-    let response = Service.create(newTodo);
+    const response = Service.create(newTodo);
 
     expect(response).toBe(todoResponse);
   });
@@ -135,16 +135,16 @@ describe('create new Todos', () => {
       deleted_at: null,
     };
 
-    let spyCreateTodo = jest.spyOn(Repository, 'create');
+    const spyCreateTodo = jest.spyOn(Repository, 'create');
     spyCreateTodo.mockReturnValue(todoResponse);
-    let response = Service.create(newTodo);
+    const response = Service.create(newTodo);
 
     expect(response).toBe(todoResponse);
   });
 });
 
 describe('update Todo', () => {
-  let spyUpdateTodo = jest.spyOn(Repository, 'updateTodo');
+  const spyUpdateTodo = jest.spyOn(Repository, 'updateTodo');
   test('should update a todo', () => {
     const todo = {
       ...mockedDB[0],
@@ -162,7 +162,7 @@ describe('update Todo', () => {
       deleted_at: null,
     };
     spyUpdateTodo.mockReturnValue(newTodo);
-    let response = Service.updateTodo(mockedDB[0].id, todo);
+    const response = Service.updateTodo(mockedDB[0].id, todo);
 
     expect(response).toBe(newTodo);
     expect(spyUpdateTodo).toBeCalledTimes(1);
@@ -171,10 +171,10 @@ describe('update Todo', () => {
 
 describe('delete Todo', () => {
   test('Should delete a todo', () => {
-    let spyDeleteTodo = jest.spyOn(Repository, 'deleteTodo');
+    const spyDeleteTodo = jest.spyOn(Repository, 'deleteTodo');
     spyDeleteTodo.mockReturnValue(true);
 
-    let response = Service.deleteTodo(mockedDB[0].id);
+    const response = Service.deleteTodo(mockedDB[0].id);
     expect(response).toBeTruthy();
   });
 });
