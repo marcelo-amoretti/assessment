@@ -35,7 +35,7 @@ const updateTodo = (id: string, todo: Todo): Todo => {
   if (todo?.done) {
     setTimeout(() => {
       Repository.deleteTodo(id);
-    }, 1000 * 30);
+    }, 1000 * 60 * 5);
   }
 
   return result;
