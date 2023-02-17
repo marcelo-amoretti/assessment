@@ -46,4 +46,17 @@ const getTodos = (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export { createTodo, deleteTodo, getTodos, getTodo };
+const updateTodo = (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const id = req.params['id'];
+    const todo = req.body;
+
+    const result = Service.updateTodo(id, todo);
+
+    res.status(StatusCodes.OK).send(result);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export { createTodo, deleteTodo, getTodos, getTodo, updateTodo };

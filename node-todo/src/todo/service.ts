@@ -23,4 +23,22 @@ const get = (id: string): Todo => Repository.getOne(id);
 
 const getTodos = (): Todo[] => Repository.getAll();
 
-export { create, deleteTodo, getTodos, get};
+const updateTodo = (id: string, todo: Todo): Todo => {
+  const oldTodo = Repository.getOne(id);
+  const result = Repository.updateTodo({
+    ...todo,
+    id,
+    created_at: oldTodo.created_at,
+    updated_at: new Date().toString(),
+  });
+
+  if (todo?.done) {
+    setTimeout(() => {
+      Repository.deleteTodo(id);
+    }, 1000 * 30);
+  }
+
+  return result;
+};
+
+export { create, deleteTodo, getTodos, get, updateTodo};

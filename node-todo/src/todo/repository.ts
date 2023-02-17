@@ -51,6 +51,27 @@ const deleteTodo = (id: string): boolean => {
     };
   }
 };
+
+const updateTodo = (todo: Todo): Todo => {
+  try {
+    const todos: Todo[] = JSON.parse(readFileSync(jsonFile, 'utf-8') || '[]');
+    const todoIndex = todos.findIndex(el => el.id === todo.id);
+    todos[todoIndex] = todo;
+
+    writeFileSync(jsonFile, JSON.stringify(todos));
+
+    return todo;
+  } catch (error: any) {
+    if (error.status) {
+      throw error;
+    }
+    throw {
+      status: StatusCodes.INTERNAL_SERVER_ERROR,
+      message: 'Unable to create new todo',
+    };
+  }
+};
+
 const getOne = (id: string): Todo => {
   try {
     let todos: Todo[] = JSON.parse(readFileSync(jsonFile, 'utf-8') || '[]');
@@ -90,4 +111,4 @@ const getAll = (): Todo[] => {
   }
 };
 
-export { create, deleteTodo, getAll, getOne };
+export { create, deleteTodo, getAll, getOne, updateTodo };

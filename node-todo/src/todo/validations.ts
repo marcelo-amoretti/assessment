@@ -20,4 +20,20 @@ const getTodo = Joi.object({
   },
 });
 
-export { createTodo, deleteTodo, getTodo };
+const updateTodo = Joi.object({
+  body: {
+    id: Joi.string().required(),
+    text: Joi.string()
+      .required()
+      .regex(/^[a-zA-Z ]*$/),
+    priority: Joi.number().min(1).max(5).optional(),
+    done: Joi.boolean().optional(),
+    updated_at: Joi.string().allow(null, ''),
+    deleted_at: Joi.string().allow(null, ''),
+  },
+  params: {
+    id: Joi.string().required(),
+  },
+});
+
+export { createTodo, deleteTodo, getTodo, updateTodo };
